@@ -177,7 +177,7 @@ module SmsApi
   #   :credits => credits - Price for a single part
   # }
   #
-  def push_msg(phone, text, params = {})
+  def push_msg(phone, text, params = {}, secure = true)
     raise NoLoginError, 'Must first call the login method' unless @@cookie
     request = {
         :api => API_VERSION,
@@ -185,7 +185,7 @@ module SmsApi
         :phone => phone,
         :text => text
     }.merge(params)
-    responce = _communicate(request, @@cookie)
+    responce = _communicate(request, @@cookie, secure)
     check_and_result_push_msg(responce)
   end
 
