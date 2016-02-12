@@ -127,7 +127,7 @@ module SmsApi
   #   :credits => credits - Price for a single part
   # }
   #
-  def push_msg_nologin(phone, text, params = {})
+  def push_msg_nologin(phone, text, params = {}, secure = true)
     request = {
         :api => API_VERSION,
         :method => 'push_msg',
@@ -136,7 +136,7 @@ module SmsApi
         :phone => phone,
         :text => text
     }.merge(params)
-    responce = _communicate(request)
+    responce = _communicate(request, secure )
     check_and_result_push_msg(responce)
   end
 
